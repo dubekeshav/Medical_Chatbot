@@ -1,0 +1,2 @@
+This package Medical_Chatbot.eff-info has been generated because we created our project as a local package now. 
+By doing this, we can now access all the files from any other file simply by importing them as we import the other packages and modules.
