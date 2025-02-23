@@ -1,6 +1,8 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.2
 Name: Medical_Chatbot
 Version: 0.1
 Author: Keshav Dube
 Author-email: dubeykeshav98@gmail.com
 License-File: LICENSE
+Dynamic: author
+Dynamic: author-email

@@ -1,5 +1,5 @@
 sentencepiece
-sentence-transformers==2.2.2
+sentence-transformers
 langchain
 flask
 pypdf
