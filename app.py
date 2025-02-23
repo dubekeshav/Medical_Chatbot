@@ -32,7 +32,8 @@ retriever = document_search.as_retriever(search_type='similarity', search_kwargs
 def query_free_llm(prompt):
     # Hugging Face API URL for BlenderBot
     API_URL = "https://api-inference.huggingface.co/models/EleutherAI/gpt-neox-20b"
-    HEADERS = {"Authorization": "Bearer REDACTED"}  # Add your token if required
+    bearer = f'Bearer {os.environ['HUGGINGFACE_API_KEY']}'
+    HEADERS = {"Authorization": bearer}  # Add your token if required
 
     response = requests.post(API_URL, headers=HEADERS, json={"inputs": prompt})
     if response.status_code == 200:
