@@ -14,8 +14,10 @@ app = Flask(__name__)
 load_dotenv()
 
 PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
+HUGGING_FACE_ACCESS_TOKEN = os.getenv('HUGGING_FACE_ACCESS_TOKEN')
 
 os.environ['PINECONE_API_KEY'] = PINECONE_API_KEY
+os.environ['HUGGING_FACE_ACCESS_TOKEN'] = HUGGING_FACE_ACCESS_TOKEN
 
 embeddings_model = download_embeddings_model()
 
@@ -32,7 +34,7 @@ retriever = document_search.as_retriever(search_type='similarity', search_kwargs
 def query_free_llm(prompt):
     # Hugging Face API URL for BlenderBot
     API_URL = "https://api-inference.huggingface.co/models/EleutherAI/gpt-neox-20b"
-    bearer = f'Bearer {os.environ['HUGGINGFACE_API_KEY']}'
+    bearer = f'Bearer {HUGGING_FACE_ACCESS_TOKEN}'
     HEADERS = {"Authorization": bearer}  # Add your token if required
 
     response = requests.post(API_URL, headers=HEADERS, json={"inputs": prompt})
@@ -67,6 +69,7 @@ def home():
 @app.route('/ask', methods=['POST', 'GET'])
 def ask():
     user_input = request.form['msg']
+    print(rag_chain(user_input))
     response = rag_chain(user_input)[0]['generated_text'].split("####Answer####")[1]
     return str(response)
 
